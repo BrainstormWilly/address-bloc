@@ -14,7 +14,8 @@ class MenuController
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
-    puts "5 - Exit"
+    puts "5 - Destroy all entries"
+    puts "6 - Exit"
     print "Enter your selection: "
 
     selection = gets.to_i
@@ -37,6 +38,10 @@ class MenuController
         read_csv
         main_menu
       when 5
+        system 'clear'
+        destroy_entries
+        main_menu
+      when 6
         puts 'Good-bye!'
         exit(0)
       else
@@ -70,6 +75,19 @@ class MenuController
 
     system 'clear'
     puts 'New entry created'
+  end
+
+  def destroy_entries
+    puts "Destroying all entries is permanent. Are you sure you want to continue?"
+    puts "y/n"
+    ans = gets.chomp
+    if ans == 'y'
+      @address_book = AddressBook.new
+      puts "All records deleted"
+    elsif ans != 'n'
+      puts "Invalid entry"
+    end
+
   end
 
   def search_entries
